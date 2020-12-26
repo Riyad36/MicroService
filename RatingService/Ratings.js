@@ -2,6 +2,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const axios = require("axios")
 
 app.use(bodyParser.json());
 
@@ -19,7 +20,7 @@ mongoose.connect("mongodb+srv://riyad_muhafiz:Riyad_36@cluster0.65k4z.mongodb.ne
 
 
 
-//create a rating
+//create a rating-----------------------------------------------
 
 app.post("/rate", (req, res) => {
 
@@ -31,6 +32,7 @@ app.post("/rate", (req, res) => {
     }
 
     //creating new rating using all the attributes
+
     var rating = new Rating(newRating)
 
     rating.save().then(() => {
@@ -47,7 +49,9 @@ app.post("/rate", (req, res) => {
 })
 
 
-//get all the ratings
+
+
+//get all the ratings ---------------------------------------------
 
 app.get("/rate", (req, res) => {
     Rating.find().then((Rating) => {
@@ -60,7 +64,9 @@ app.get("/rate", (req, res) => {
 
 } )
 
-//get a single rating
+
+
+//get a single rating------------------------------------------------
 
 app.get("/rate/:id", (req, res) => {
     Rating.findById(req.params.id).then((Rating) => {
@@ -77,6 +83,25 @@ app.get("/rate/:id", (req, res) => {
         }
     })
 })
+
+
+
+// now we will fetch the list of products from here
+
+// app.get("/product/list", (req, res) =>{
+
+//     axios.put("http://localhost:5555/product/list")  
+//     }).catch(err => {
+//         if(err){
+//             throw err;
+//         }
+//     })
+
+// } )
+
+
+
+
 
 
 app.listen(4545, () => {
